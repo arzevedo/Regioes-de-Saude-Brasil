@@ -2,7 +2,8 @@
 title: "Regioes de Saude Brasil"
 author: "Arthur Rios"
 date: "04/06/2020"
-output: html_document
+output: github_document
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +16,7 @@ library(leaflet)
 Esse repositório tem o objetivo de agrupar os arquivos de shapes dos
 municípios de todo o Brasil com a informação da região de saúde.
 
-O link para o csv está [aqui]()
+O link para o csv está [aqui](https://raw.githubusercontent.com/arzevedo/Regioes-de-Saude-Brasil/master/reg_saude_mun.csv)
 
 Vamos utilizar o shape do @tbrugz do repositório
 [geodata-br](https://github.com/tbrugz/geodata-br)
