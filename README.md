@@ -64,3 +64,5 @@ mun_bahia %>%
 
 Comparando com a fonte oficial do governo da
 [Bahia](http://www1.saude.ba.gov.br/mapa_bahia/indexch.asp):
+
+![image](https://user-images.githubusercontent.com/36868624/83819649-cc40d300-a6a0-11ea-911e-536cc685965b.png)
