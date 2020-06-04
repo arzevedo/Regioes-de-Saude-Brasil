@@ -3,7 +3,6 @@ title: "Regioes de Saude Brasil"
 author: "Arthur Rios"
 date: "04/06/2020"
 output: github_document
-always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -58,8 +57,6 @@ Vamos observar uma comparação do output com a Bahia
 ``` {r exemplo, message=FALSE, warning=FALSE}
 mun_bahia <- mun_reg_sau %>% 
   dplyr::filter(startsWith(id, "29")) # Código Da BAHIA
-
-pal <- colorFactor("Set1", domain = mun_bahia$CO_REGSAUD)
 
 mun_bahia %>% 
   ggplot(aes(fill = CO_REGSAUD)) +
