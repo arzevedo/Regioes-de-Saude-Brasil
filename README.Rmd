@@ -10,7 +10,6 @@ always_allow_html: true
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse) 
 library(sf)
-library(leaflet)
 ```
 
 Esse repositório tem o objetivo de agrupar os arquivos de shapes dos
@@ -21,7 +20,7 @@ O link para o csv está [aqui](https://raw.githubusercontent.com/arzevedo/Regioe
 Vamos utilizar o shape do @tbrugz do repositório
 [geodata-br](https://github.com/tbrugz/geodata-br)
 
-```{r read_mun, warning=FALSE}
+```{r read_mun, warning=FALSE,message=FALSE}
 mun_shp <-
 sf::read_sf("https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-100-mun.json")
 ```
@@ -34,7 +33,7 @@ territoriais](ftp://ftp.datasus.gov.br/territorio/tabelas). Para fazer o
 download do pdf com dicionário vá esse
 [link](ftp://ftp.datasus.gov.br/territorio/doc/bases_territoriais.pdf).
 
-```{r regiao saude, warning=FALSE}
+```{r regiao saude, warning=FALSE,message=FALSE}
 reg_sau <- readr::read_csv("data/rl_municip_regsaud.csv")
 ```
 
@@ -56,22 +55,17 @@ readr::write_csv(mun_reg_sau, path = "reg_saude_mun.csv")
 
 Vamos observar uma comparação do output com a Bahia
 
-``` {r exemplo, warning=FALSE}
+``` {r exemplo, message=FALSE, warning=FALSE}
 mun_bahia <- mun_reg_sau %>% 
   dplyr::filter(startsWith(id, "29")) # Código Da BAHIA
 
 pal <- colorFactor("Set1", domain = mun_bahia$CO_REGSAUD)
 
 mun_bahia %>% 
-  leaflet() %>% 
-  addPolygons(
-    color = "#718075", layerId = ~id,
-    opacity = 1.0, fillOpacity = 0.9, weight = 1,
-    fillColor = ~pal(CO_REGSAUD),
-    highlightOptions = highlightOptions(color = "#FFEE58", weight = 3,
-                                        bringToFront = FALSE),
-    label = ~CO_REGSAUD
-  )
+  ggplot(aes(fill = CO_REGSAUD)) +
+  geom_sf(show.legend = FALSE) +
+  scale_fill_viridis_d() +
+  theme_void()
 ```
 
 Comparando com a fonte oficial do governo da [Bahia](http://www1.saude.ba.gov.br/mapa_bahia/indexch.asp):
