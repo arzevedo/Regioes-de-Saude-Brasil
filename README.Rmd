@@ -61,8 +61,10 @@ mun_bahia <- mun_reg_sau %>%
 mun_bahia %>% 
   ggplot(aes(fill = CO_REGSAUD)) +
   geom_sf(show.legend = FALSE) +
-  scale_fill_viridis_d() +
   theme_void()
 ```
 
 Comparando com a fonte oficial do governo da [Bahia](http://www1.saude.ba.gov.br/mapa_bahia/indexch.asp):
+
+
+![image](https://user-images.githubusercontent.com/36868624/83819649-cc40d300-a6a0-11ea-911e-536cc685965b.png)
