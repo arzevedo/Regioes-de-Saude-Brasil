@@ -48,6 +48,10 @@ mun_reg_sau <- mun_shp %>%
   dplyr::left_join(reg_sau, by = c("mun_red" = "CO_MUNICIP"))
 
 readr::write_csv(mun_reg_sau, path = "reg_saude_mun.csv")
+
+readr::write_csv(mun_reg_sau %>% as.data.frame() %>% 
+                   dplyr::select(-geometry), 
+                 path = "reg_saude_raw.csv")
 ```
 
 ## Um exemplo com a Bahia
