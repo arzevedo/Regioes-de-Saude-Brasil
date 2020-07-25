@@ -47,6 +47,10 @@ readr::write_csv(mun_reg_sau, path = "reg_saude_mun.csv")
 readr::write_csv(mun_reg_sau %>% as.data.frame() %>% 
                    dplyr::select(-geometry), 
                  path = "reg_saude_raw.csv")
+mun_reg_sau <- st_make_valid(mun_reg_sau)
+
+dir.create("Reg_Saude_Shape")
+sf::write_sf(mun_reg_sau, "Reg_Saude_Shape/reg_saude.shp")
 ```
 
 ## Um exemplo com a Bahia
@@ -55,11 +59,13 @@ Vamos observar uma comparação do output com a Bahia
 
 ``` r
 mun_bahia <- mun_reg_sau %>% 
-  dplyr::filter(startsWith(id, "29")) # Código Da BAHIA
+  dplyr::filter(startsWith(id, "29")) %>%  # Código Da BAHIA
+  group_by(CO_REGSAUD) %>% 
+  count()
 
 mun_bahia %>% 
   ggplot(aes(fill = CO_REGSAUD)) +
-  geom_sf(show.legend = FALSE) +
+  geom_sf(show.legend = FALSE,mapping = aes(geometry = geometry)) +
   theme_void()
 ```
 
